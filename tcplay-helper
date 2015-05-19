@@ -27,8 +27,12 @@ EOF
   [[ -d $mountpt ]] || mkdir "$mountpt"
 
   # mount options
-  userid=$(awk -F"[=(]" '{print $2,$4}' <(id "$user"))
-  mount -o nodev,nosuid /dev/mapper/"$cryptdev" "$mountpt"
+  if [ -z ${3+x} ]; then
+      mount /dev/mapper/"$cryptdev" "$mountpt"
+  else
+      userid=$(awk -F"[=(]" '{print $2,$4}' <(id "$user"))
+      mount -o nodev,nosuid /dev/mapper/"$cryptdev" "$mountpt"
+  fi
 
 # close and clean up…
 elif [[ $1 == close ]]; then
