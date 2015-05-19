@@ -8,9 +8,10 @@ tcplay-helper is still crude and early in development. Its been tested primarily
 
 Usage
 =====
-.. code-block::
-    $ tcplay-helper open/close <container-file> <username>
 
+.. code-block::
+
+   $ tcplay-helper open/close <container-file> <username>
 
 The script takes three arguments.
 
