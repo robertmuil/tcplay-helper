@@ -1,16 +1,14 @@
 # Maintainer: Edvard Holst <edvard.holst at gmail> 
 
 pkgname=tcplay-helper-git
-pkgver=1.0
+pkgver=r9.a9165bd
 pkgrel=1
-pkgdesc="A helper script for mounting and unmounting tcplay containers"
+pkgdesc="A helper script for managing tcplay containers"
 arch=('any')
 url="https://github.com/Zyg0te/tcplay-helper"
 license=('MIT')
 depends=('tcplay')
 makedepends=('git')
-# The git repo is detected by the 'git:' or 'git+' beginning. The branch
-# '$pkgname' is then checked out upon cloning, expediating versioning:
 source=($pkgname::git+'https://github.com/Zyg0te/tcplay-helper.git')
 # Because the sources are not static, skip Git checksum:
 md5sums=('SKIP')
@@ -21,6 +19,6 @@ pkgver() {
 }
 
 package() {
-  cd "$srcdir/"
-  install -Dm755 tcplay-helper        "$pkgdir"/usr/bin/tcplay-helper
+  cd "$srcdir/$pkgname"
+  install -Dm755 tcplay-helper "$pkgdir"/usr/bin/tcplay-helper
 }
