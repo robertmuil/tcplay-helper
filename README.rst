@@ -18,7 +18,7 @@ The script takes three arguments.
 
 * "open" or "close" depending on whether you want to mount or unmount the container
 * The container file name
-* The username you want to mount the container as. 
+* Optional: The username you want to mount the container as. This can be omitted to mount the container as root, and is not necessary when closing the container.
 
 So for example, if I have a contained named container.tc and wanted to open it as the user archie I would run execute the following.
 
@@ -30,7 +30,7 @@ And when I'm done playing around and I want to close the container, I simply run
 
 .. code-block::
 
-   $ tcplay-helper close container.tc archie
+   $ tcplay-helper close container.tc
 
 Oh, and the script needs to be run as root
 
