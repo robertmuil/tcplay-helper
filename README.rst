@@ -16,9 +16,21 @@ Usage
 
 The script takes three arguments.
 
-* "Open" or "Close" depending on whether you want to mount or unmount the container
+* "open" or "close" depending on whether you want to mount or unmount the container
 * The container file name
 * The username you want to mount the container as. 
+
+So for example, if I have a contained named container.tc and wanted to open it as the user archie I would run execute the following.
+
+.. code-block::
+
+   $ tcplay-helper open container.tc archie
+   
+And when I'm done playing around and I want to close the container, I simply run:
+
+.. code-block::
+
+   $ tcplay-helper close container.tc archie
 
 Oh, and the script needs to be run as root
 
