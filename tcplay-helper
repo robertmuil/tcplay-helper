@@ -43,5 +43,5 @@ elif [[ $1 == close ]]; then
   done <<< "$devices"
   
 else
-  printf "%s\n" "Usage: tc-play-helper.sh open/close <containe> <username>"
+  printf "%s\n" "Usage: tc-play-helper open/close <container> <username>"
 fi
