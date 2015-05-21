@@ -1,6 +1,6 @@
 tcplay-helper
 ================
-tcplay-helper lets you easily manage tc-play containers. The script currently supports mounting and unmounting tc-play containers and will hopefully support creating containers in the near future. Usage is simple and the only requirement is that tcplay is installed on the system.
+tcplay-helper lets you easily manage truecrypt containers with tc-play. The script currently supports creating, mounting and unmounting tc-play containers. Usage is simple and the only requirement is that tcplay is installed on the system.
 
 
 Note
