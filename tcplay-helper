@@ -36,6 +36,7 @@ if [[ $1 == create ]]; then
       tcplay -c -d "$loopdev" -a whirlpool -b AES-256-XTS
       tcplay -m "$cryptdev" -d "$loopdev"
       mkfs.ext4 /dev/mapper/"$cryptdev"
+      sleep 2
       dmsetup remove "$cryptdev"
       losetup -d "$loopdev"
   fi
