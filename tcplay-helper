@@ -5,6 +5,17 @@ user=$3
 cryptdev=$2
 mountpt=/mnt/truecrypt
 
+print_usage(){
+  printf "%s\n" "Usage: [Operation] [Container] [OPTIONS]
+ 
+    create [container] [SIZE]
+    open [container] [user to mount as]
+    close [container]
+ 
+    The SIZE argument is an integer and optional unit (example: 10K is 10*1024).
+    Units are K,M,G,T,P,E,Z,Y (powers of 1024) or KB,MB,... (powers of 1000)"
+}
+
 # must be run as root
 if (( $EUID != 0 )); then
   printf "%s\n" "Root permissions required."
@@ -13,17 +24,24 @@ fi
 
 # create container
 if [[ $1 == create ]]; then
-  loopdev=$(losetup -f)
-  fallocate -l "$3" "$cryptdev"
-  losetup "$loopdev" "$cryptdev"
-  tcplay -c -d "$loopdev" -a whirlpool -b AES-256-XTS
-  dmsetup remove "$cryptdev"
-  losetup -d "$loopdev"
   
-fi
+  if [ -z ${3+x} ]; then
+      printf "%s\n" "Error: No size argument supplied."
+      print_usage
+
+  else
+      loopdev=$(losetup -f)
+      fallocate -l "$3" "$cryptdev"
+      losetup "$loopdev" "$cryptdev"
+      tcplay -c -d "$loopdev" -a whirlpool -b AES-256-XTS
+      tcplay -m "$cryptdev" -d "$loopdev"
+      mkfs.ext4 /dev/mapper/"$cryptdev"
+      dmsetup remove "$cryptdev"
+      losetup -d "$loopdev"
+  fi
 
 # decrypt and mount container
-if [[ $1 == open ]]; then
+elif [[ $1 == open ]]; then
   loopdev=$(losetup -f)
   losetup "$loopdev" $cryptdev
   tcplay -m "$cryptdev" -d "$loopdev"
@@ -57,12 +75,6 @@ elif [[ $1 == close ]]; then
   done <<< "$devices"
   
 else
-printf "%s\n" "Usage: [Operation] [Container] [OPTIONS]
+  print_usage
 
-   create [container] [SIZE]
-   open [container] [user to mount as]
-   close [container]
-
-   The SIZE argument is an integer and optional unit (example: 10K is 10*1024).
-   Units are K,M,G,T,P,E,Z,Y (powers of 1024) or KB,MB,... (powers of 1000)"
 fi
