@@ -11,6 +11,16 @@ if (( $EUID != 0 )); then
   exit 1
 fi
 
+# create container
+if [[ $1 == create ]]; then
+  loopdev=$(losetup -f)
+  fallocate -l "$3" "$cryptdev"
+  losetup "$loopdev" "$cryptdev"
+  tcplay -c -d "$loopdev" -a whirlpool -b AES-256-XTS
+  dmsetup remove "$cryptdev"
+  losetup -d "$loopdev"
+  
+fi
 
 # decrypt and mount container
 if [[ $1 == open ]]; then
@@ -47,5 +57,12 @@ elif [[ $1 == close ]]; then
   done <<< "$devices"
   
 else
-  printf "%s\n" "Usage: tc-play-helper open/close <container> <username>"
+printf "%s\n" "Usage: [Operation] [Container] [OPTIONS]
+
+   create [container] [SIZE]
+   open [container] [user to mount as]
+   close [container]
+
+   The SIZE argument is an integer and optional unit (example: 10K is 10*1024).
+   Units are K,M,G,T,P,E,Z,Y (powers of 1024) or KB,MB,... (powers of 1000)"
 fi
