@@ -12,19 +12,33 @@ Usage
 
 .. code-block::
 
-   $ tcplay-helper open/close <container-file> <username>
+   $ tcplay-helper create/open/close <container-file> <OPTION>
 
-The script takes three arguments.
 
-* "open" or "close" depending on whether you want to mount or unmount the container
+* "create," "open" or "close" depending on whether you want to create a new container or mount/unmount an existing container
 * The container file name
-* Optional: The username you want to mount the container as. This can be omitted to mount the container as root, and is not necessary when closing the container.
+* The OPTION depends on what operation you are performing.
+** create [container] [SIZE]
+** open [container] [user to mount as]
+** close [container]
 
-So for example, if I have a contained named container.tc and wanted to open it as the user archie I would run execute the following.
+So for example, if I wanted to create a new 1M sized container named container.tc I would do as follows.
+
+.. code-block::
+   
+   $ tcplay-helper create container.tc 1M
+
+Then if I wanted to open it as the user archie I would run execute the following.
 
 .. code-block::
 
    $ tcplay-helper open container.tc archie
+
+Alternatively, if I just wanted to open and mount the container as root I can exclude the username argument
+
+.. code-block::
+   $ tcplay-helper open container.tc
+
    
 And when I'm done playing around and I want to close the container, I simply run:
 
@@ -32,7 +46,7 @@ And when I'm done playing around and I want to close the container, I simply run
 
    $ tcplay-helper close container.tc
 
-Oh, and the script needs to be run as root
+Oh, and the script needs to be run as root. Don't worry though, the script will remind you if you run it as a regular user.
 
 Installation
 =====
