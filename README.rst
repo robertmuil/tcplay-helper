@@ -18,9 +18,9 @@ Usage
 * "create," "open" or "close" depending on whether you want to create a new container or mount/unmount an existing container
 * The container file name
 * The OPTION depends on what operation you are performing.
-** create [container] [SIZE]
-** open [container] [user to mount as]
-** close [container]
+ * create [container] [SIZE]
+ * open [container] [user to mount as]
+ * close [container]
 
 So for example, if I wanted to create a new 1M sized container named container.tc I would do as follows.
 
