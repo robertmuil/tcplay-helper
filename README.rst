@@ -1,6 +1,6 @@
 tcplay-helper
 ================
-tcplay-helper lets you easily manage tc-play containers. The script currently supports mounting and unmounting tc-play containers and will hopefully support creating containers in the near future. Usage is simple and the only requirement is that tcplay is installed on the system.
+tcplay-helper lets you easily manage truecrypt containers with tc-play. The script currently supports creating, mounting and unmounting tc-play containers. Usage is simple and the only requirement is that tcplay is installed on the system.
 
 
 Note
@@ -18,9 +18,9 @@ Usage
 * "create," "open" or "close" depending on whether you want to create a new container or mount/unmount an existing container
 * The container file name
 * The OPTION depends on what operation you are performing.
-** create [container] [SIZE]
-** open [container] [user to mount as]
-** close [container]
+ * create [container] [SIZE]
+ * open [container] [OPTIONAL: user to mount as]
+ * close [container]
 
 So for example, if I wanted to create a new 1M sized container named container.tc I would do as follows.
 
