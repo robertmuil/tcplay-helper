@@ -19,7 +19,7 @@ Usage
 * The container file name
 * The OPTION depends on what operation you are performing.
  * create [container] [SIZE]
- * open [container] [user to mount as]
+ * open [container] [OPTIONAL: user to mount as]
  * close [container]
 
 So for example, if I wanted to create a new 1M sized container named container.tc I would do as follows.
