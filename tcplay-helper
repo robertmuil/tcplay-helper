@@ -9,7 +9,7 @@ print_usage(){
   printf "%s\n" "Usage: [Operation] [Container] [OPTIONS]
  
     create [container] [SIZE]
-    open [container] [user to mount as]
+    open [container] [optional - user to mount as]
     close [container]
  
     The SIZE argument is an integer and optional unit (example: 10K is 10*1024).
