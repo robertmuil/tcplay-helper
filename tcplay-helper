@@ -5,6 +5,27 @@ user=$3
 cryptdev=$2
 mountpt=/mnt/truecrypt
 
+
+# Trap SIGINT
+trap cleanup_on_abort SIGINT
+
+cleanup_on_abort(){
+  printf "%s\n" "Ctrl+C detected, cleaning up."
+  cleanup
+}
+
+cleanup(){
+  devices=$(awk -v dev=$cryptdev -F":" '/dev/ {print $1}' <(losetup -a))
+  umount "$mountpt"
+  dmsetup remove "$cryptdev" || printf "%s\n" "demapping failed"
+
+  while read -r deviceline; do
+
+    losetup -d "$deviceline" || printf "%s\n" "deleting $deviceline failed"
+
+  done <<< "$devices"
+}
+
 print_usage(){
   printf "%s\n" "Usage: [Operation] [Container] [OPTIONS]
  
@@ -65,15 +86,7 @@ EOF
 
 # close and clean up…
 elif [[ $1 == close ]]; then
-  devices=$(awk -v dev=$cryptdev -F":" '/dev/ {print $1}' <(losetup -a))
-  umount "$mountpt"
-  dmsetup remove "$cryptdev" || printf "%s\n" "demapping failed"
-
-  while read -r deviceline; do
-
-    losetup -d "$deviceline" || printf "%s\n" "deleting $deviceline failed"
-
-  done <<< "$devices"
+  cleanup
   
 else
   print_usage
