@@ -51,4 +51,4 @@ Oh, and the script needs to be run as root. Don't worry though, the script will 
 Installation
 =====
 
-Just download the tcplay-helper script and place it wherever you want. For easy installation on Arch Linux, tcplay-helper can be installed from the [AUR](https://aur4.archlinux.org/packages/tcplay-helper-git/).
+Just download the tcplay-helper script and place it wherever you want. For easy installation on Arch Linux, tcplay-helper can be installed from the AUR at https://aur4.archlinux.org/packages/tcplay-helper-git/ .
