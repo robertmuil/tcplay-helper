@@ -52,3 +52,8 @@ Installation
 =====
 
 Just download the tcplay-helper script and place it wherever you want. For easy installation on Arch Linux, tcplay-helper can be installed from the AUR at https://aur4.archlinux.org/packages/tcplay-helper-git/ .
+
+Known Issues
+=====
+
+tcplay-helper does not yet handle mounting several containers at once and will always try to mount the container at /mnt/truecrypt regardless of whether another container is already mounted. 
