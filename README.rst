@@ -5,7 +5,7 @@ tcplay-helper lets you easily manage truecrypt containers with tc-play. The scri
 
 Note
 ====
-tcplay-helper is still crude and early in development. Its been tested primarily with containers formatted as ext4. 
+tcplay-helper is still a work in progress. Its been tested primarily with containers formatted as ext4.  
 
 Usage
 =====
