@@ -16,7 +16,9 @@ cleanup_on_abort(){
 
 cleanup(){
   devices=$(awk -v dev=$cryptdev -F":" '/dev/ {print $1}' <(losetup -a))
+  # unmount and remove mount point
   umount "$mountpt"
+  [ -d "$mountpt" ] && rm -rf "$mountpt"
   dmsetup remove "$cryptdev" || printf "%s\n" "demapping failed"
 
   while read -r deviceline; do
