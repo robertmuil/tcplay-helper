@@ -15,7 +15,7 @@ cleanup_on_abort(){
 }
 
 cleanup(){
-  devices=$(awk -v dev=$cryptdev -F":" '/dev/ {print $1}' <(losetup -a))
+  devices=$(awk -v dev="$cryptdev" -F":" '/dev/ {print $1}' <(losetup -a))
   # unmount and remove mount point
   umount "$mountpt"
   [ -d "$mountpt" ] && rm -rf "$mountpt"
@@ -45,7 +45,7 @@ if (( $EUID != 0 )); then
   exit 1
 fi
 
-# create container
+# create container and format it as ext4
 if [[ $1 == create ]]; then
   
   if [ -z ${3+x} ]; then
@@ -67,7 +67,7 @@ if [[ $1 == create ]]; then
 # decrypt and mount container
 elif [[ $1 == open ]]; then
   loopdev=$(losetup -f)
-  losetup "$loopdev" $cryptdev
+  losetup "$loopdev" "$cryptdev"
   tcplay -m "$cryptdev" -d "$loopdev"
 
   # read passphrase
